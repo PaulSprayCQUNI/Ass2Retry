@@ -1,0 +1,2 @@
+R0001,101,One Street,OnesVille,1111,One Territory,111.11,true,A room in a house,true,true
+W0002,22,Two Avenue,Twoston,2222,Two Capital Territory,222.22,true,A whole house in Twoston,3,1,true,true
