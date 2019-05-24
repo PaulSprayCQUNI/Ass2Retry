@@ -106,14 +106,16 @@ public class EnterEditFrame extends JFrame {
     the first frame of the program*/
     private ArrayList<Rental> rentals;
     private String userAction;
+    private int rentalEditIndex;
 
     // begin constructor for this frame    
-    public EnterEditFrame(ArrayList<Rental> rentals, String userAction) {
+    public EnterEditFrame(ArrayList<Rental> rentals, String userAction, int rentalEditIndex) {
 
         /* instatiate object of ArrayList and String argument referring to the
         button action captured in class FSAApp */
         this.rentals = rentals;
         this.userAction = userAction;
+        this.rentalEditIndex = rentalEditIndex;
 
         // layout for the EnterEditFrame
         this.setLayout(new BorderLayout());
@@ -273,7 +275,9 @@ public class EnterEditFrame extends JFrame {
         of this frame when the Edit button is pushed on the first frame of the 
         program */
         if (userAction.equals("edit")) {
-            Rental r = rentals.get(0);
+
+            // rentals.get(i).getRentalID().equals(textIdEdit));            
+            Rental r = rentals.get(rentalEditIndex);
 
             idTxtFld.setText(r.getRentalID());
             stNumTxtFld.setText(r.getAddress().getStreetNumber());
@@ -316,10 +320,12 @@ public class EnterEditFrame extends JFrame {
 
             }
 
-        } // end of if statement for userAction of "edit"
+        }
+        // end of if statement for userAction of "edit"
 
         // begin if statement for the creation of the frame for a Room Rental 
-        if (userAction.equals("newRoom")) {
+        if (userAction.equals(
+                "newRoom")) {
             numRmsLbl.setEnabled(false);
             numRmsTxtFld.setEnabled(false);
             numRmsTxtFld.setEditable(false);
@@ -334,7 +340,8 @@ public class EnterEditFrame extends JFrame {
         } // end of Room Rental if statement
 
         // begin if statement for the creation of the frame for a Whole Rental 
-        if (userAction.equals("newWhole")) {
+        if (userAction.equals(
+                "newWhole")) {
             hasEnsuiteRadBtn.setEnabled(false);
             noEnsuiteRadBtn.setEnabled(false);
             cplsAllwdRadBtn.setEnabled(false);
@@ -439,6 +446,7 @@ public class EnterEditFrame extends JFrame {
             // objects for setting of RoomRental values to object of Rentals r
             rr = new RoomRental();
             r = rr;
+            rr.setRentalID(RentalIDGenerator.getRoomRentalId());
             rr.setCouplesAllowed(cplsAllwdRadBtn.isSelected());
             rr.setHasEnsuite(hasEnsuiteRadBtn.isSelected());
 
@@ -500,6 +508,7 @@ public class EnterEditFrame extends JFrame {
             // objects for setting of WholeRental values to object of Rentals r
             wr = new WholeRental();
             r = wr;
+            wr.setRentalID(RentalIDGenerator.getWholeRentalId());
             wr.setNumRooms(Integer.parseInt(numRmsTxtFld.getText()));
             wr.setNumBathrooms(Integer.parseInt(numBathRmsTxtFld.getText()));
             wr.setHasGarage(hasGarageRadBtn.isSelected());
@@ -508,8 +517,6 @@ public class EnterEditFrame extends JFrame {
         }
         // object of Address class required to use get methods of that class
         Address a = new Address();
-
-        r.setRentalID(idTxtFld.getText()); //only used a place holder for this program
         a.setStreetNumber(stNumTxtFld.getText());
         a.setStreetName(stNameTxtFld.getText());
         a.setCityName(cityTxtFld.getText());
@@ -522,7 +529,8 @@ public class EnterEditFrame extends JFrame {
         r.setDescription(descriptionTxtFld.getText());
 
         /* return r as the Rental object to ArrayList rentals*/
-        rentals.add(0, r);
+        rentals.add(r);
+
     }
 
     /* private classes and methods to handle ActionListener events for buttons
@@ -547,6 +555,7 @@ public class EnterEditFrame extends JFrame {
             }
             if (f.getTitle().equals("FSA Rental Program - Welcome")) {
                 f.setVisible(true);
+
             }
         }
 

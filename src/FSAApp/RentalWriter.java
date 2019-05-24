@@ -36,7 +36,18 @@ public class RentalWriter {
 
         // Write people to file
         for (Rental r : rentals) {
-            output.format("%s,%s,%d%n", r.getRentalID());
+
+            if (r instanceof WholeRental) {
+                WholeRental wr = (WholeRental) r;
+                output.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,", r.getRentalID(), 
+                        r.getAddress().getStreetNumber(), r.getAddress().getStreetName(), 
+                        r.getAddress().getCityName(),r.getAddress().getPostCode(), r.getAddress().getState(),
+                        r.getWeeklyPrice(), r.getDescription(), r.isFurnished(), ((WholeRental) r).getNumRooms(),
+                        ((WholeRental) r).getNumBathrooms(), ((WholeRental) r).arePetsAllowed(), ((WholeRental) r).isHasGarage());
+
+            } else if (r instanceof RoomRental) {
+
+            }
         }
 
         // Close the file

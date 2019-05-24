@@ -130,7 +130,7 @@ public class WholeRental extends Rental {
     public String toString() {
         return super.toString() + "Number of Rooms in House: " + numRooms
                 + " \nNumber of Bathrooms: " + numBathrooms
-                + ", \nGarage Parking: " + hasGarage
+                + " \nGarage Parking: " + hasGarage
                 + " \nPets Allowed: " + petsAllowed + "\n";
     }// end of output to String()
 

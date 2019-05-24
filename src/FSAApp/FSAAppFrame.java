@@ -38,14 +38,14 @@ public class FSAAppFrame extends JFrame {
     /* an ArrayList called rentals created of the type Rental to store 
     values for the abstract super class Rental  */
     private ArrayList<Rental> rentals;
+    private int rentalEditIndex;
 
     /* create constructor for laying out components onto the first Frame*/
     public FSAAppFrame() {
 
         /* initialise the ArrayList rentals*/
         rentals = new ArrayList<Rental>();
-        
-       
+
         try {
             RentalReader rentalReader = new RentalReader("FSA_Availability.csv");
             rentals = rentalReader.getRentals();
@@ -54,8 +54,6 @@ public class FSAAppFrame extends JFrame {
             System.out.println("No such filename exists, creating file in path." + e);
             System.exit(1);
         }
-        
-    
 
         /* add components for FSAAppFrame - apply layout for panels within Frame*/
         pnlMainBtns = new JPanel();
@@ -79,7 +77,6 @@ public class FSAAppFrame extends JFrame {
         editRentalBtn = new JButton("Edit");
         editRentalBtn.addActionListener(new EditBtnAction());
         textId = new JTextField("", 6);
-        textId.setEditable(false);          //uneditable until DisplayBtnAction
 
         displayRentalBtn = new JButton("Display");
         displayRentalBtn.addActionListener(new DisplayBtnAction());
@@ -164,7 +161,7 @@ public class FSAAppFrame extends JFrame {
             }
         }
         /* Create a new EnterEditFrame */
-        EnterEditFrame frame = new EnterEditFrame(rentals, userAction);
+        EnterEditFrame frame = new EnterEditFrame(rentals, userAction, rentalEditIndex);
         frame.setTitle("Enter or Update Rental");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(600, 400);
@@ -204,7 +201,21 @@ public class FSAAppFrame extends JFrame {
                 JOptionPane.showMessageDialog(null, "No Rentals Entered");
 
             } else {
-                goToEnterEditFrame("edit");
+                int i = 0;
+                System.out.println(i);
+                while (i < rentals.size() && !rentals.get(i).getRentalID().equals(textId.getText())) {
+                    System.out.println(i);
+                    i++;
+                }
+                if (i == rentals.size()) {
+                    JOptionPane.showMessageDialog(null, "No such Id exists in the list",
+                            "", JOptionPane.ERROR_MESSAGE);
+
+                } else {
+                    rentalEditIndex = i;
+                    goToEnterEditFrame("edit");
+                }
+
             } // end if else statment
         }   // end method
     }   //end private nested class
