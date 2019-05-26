@@ -30,6 +30,9 @@ public class RentalWriter {
             System.err.println("Error opening the file. Terminating.");
             System.exit(1);
         }
+        finally {
+            // to do - close file?
+        }
 
         rentals = new ArrayList<>();
         String rentalID;
@@ -39,13 +42,17 @@ public class RentalWriter {
 
             if (r instanceof WholeRental) {
                 WholeRental wr = (WholeRental) r;
-                output.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,", r.getRentalID(), 
-                        r.getAddress().getStreetNumber(), r.getAddress().getStreetName(), 
-                        r.getAddress().getCityName(),r.getAddress().getPostCode(), r.getAddress().getState(),
+                output.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%.2f,%s,%b,%d,%d,%b,%b", r.getRentalID(),
+                        r.getAddress().getStreetNumber(), r.getAddress().getStreetName(),
+                        r.getAddress().getCityName(), r.getAddress().getPostCode(), r.getAddress().getState(),
                         r.getWeeklyPrice(), r.getDescription(), r.isFurnished(), ((WholeRental) r).getNumRooms(),
-                        ((WholeRental) r).getNumBathrooms(), ((WholeRental) r).arePetsAllowed(), ((WholeRental) r).isHasGarage());
+                        ((WholeRental) r).getNumBathrooms(), ((WholeRental) r).isHasGarage(), ((WholeRental) r).arePetsAllowed());
 
             } else if (r instanceof RoomRental) {
+                output.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%.2f,%s,%b,%b,%b", r.getRentalID(),
+                        r.getAddress().getStreetNumber(), r.getAddress().getStreetName(),
+                        r.getAddress().getCityName(), r.getAddress().getPostCode(), r.getAddress().getState(),
+                        r.getWeeklyPrice(), r.getDescription(), r.isFurnished(), ((RoomRental) r).areCouplesAllowed(), ((RoomRental) r).hasEnsuite());
 
             }
         }

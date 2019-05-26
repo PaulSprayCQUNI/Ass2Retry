@@ -14,6 +14,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +41,7 @@ public class FSAAppFrame extends JFrame {
     values for the abstract super class Rental  */
     private ArrayList<Rental> rentals;
     private int rentalEditIndex;
+    
 
     /* create constructor for laying out components onto the first Frame*/
     public FSAAppFrame() {
@@ -49,7 +52,8 @@ public class FSAAppFrame extends JFrame {
         try {
             RentalReader rentalReader = new RentalReader("FSA_Availability.csv");
             rentals = rentalReader.getRentals();
-
+ 
+                       
         } catch (RentalFileNotFoundException e) {
             System.out.println("No such filename exists, creating file in path." + e);
             System.exit(1);
@@ -119,6 +123,7 @@ public class FSAAppFrame extends JFrame {
                     JOptionPane.YES_NO_OPTION);
             if (confirmed == JOptionPane.YES_OPTION) {
                 dispose();
+                RentalWriter rentalListWriter = new RentalWriter("FSA_Availability.csv", rentals);
                 System.exit(0);
             }
         } // end method
@@ -143,10 +148,22 @@ public class FSAAppFrame extends JFrame {
         required new DisplayFrame */
         DisplayFrame frame = new DisplayFrame(rentals, userAction);
         frame.setTitle("Displaying all Rentals");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(800, 400);
         frame.setVisible(true);
         frame.setResizable(true);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                String ObjButtons[] = {"Yes", "No"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to exit?", "Friendly Student Accommodation App", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    RentalWriter rentalListWriter = new RentalWriter("FSA_Availability.csv", rentals);
+                    System.exit(0);
+                }
+            }
+        });
+
     }   // end method
 
     /* method for disposing of opening frame and creating a frame to appear 
@@ -163,10 +180,21 @@ public class FSAAppFrame extends JFrame {
         /* Create a new EnterEditFrame */
         EnterEditFrame frame = new EnterEditFrame(rentals, userAction, rentalEditIndex);
         frame.setTitle("Enter or Update Rental");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(600, 400);
         frame.setVisible(true);
         frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                String ObjButtons[] = {"Yes", "No"};
+                int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to exit?", "Friendly Student Accommodation App", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);
+                if (PromptResult == JOptionPane.YES_OPTION) {
+                    RentalWriter rentalListWriter = new RentalWriter("FSA_Availability.csv", rentals);
+                    System.exit(0);
+                }
+            }
+        });
 
     } // end method
 
