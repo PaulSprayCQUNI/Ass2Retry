@@ -54,6 +54,7 @@ public class RentalReader {
                     rr.setAddress(new Address(lineScanner.next(), lineScanner.next(), lineScanner.next(), lineScanner.next(), lineScanner.next()));
                     rr.setWeeklyPrice(Double.parseDouble(lineScanner.next()));
                     rr.setFurnished(Boolean.parseBoolean(lineScanner.next()));
+                    rr.setDescription(lineScanner.next());
                     rr.setCouplesAllowed(Boolean.parseBoolean(lineScanner.next()));
                     rr.setHasEnsuite(Boolean.parseBoolean(lineScanner.next()));
                     rentals.add(rr);
@@ -63,6 +64,7 @@ public class RentalReader {
                     wr.setAddress(new Address(lineScanner.next(), lineScanner.next(), lineScanner.next(), lineScanner.next(), lineScanner.next()));
                     wr.setWeeklyPrice(Double.parseDouble(lineScanner.next()));
                     wr.setFurnished(Boolean.parseBoolean(lineScanner.next()));
+                    wr.setDescription(lineScanner.next());
                     wr.setNumRooms(Integer.parseInt(lineScanner.next()));
                     wr.setNumBathrooms(Integer.parseInt(lineScanner.next()));
                     wr.setHasGarage(Boolean.parseBoolean(lineScanner.next()));
@@ -80,7 +82,8 @@ public class RentalReader {
                 System.exit(1);
             } // If you remove the following catch, then this error will be caught in the main
 
-            // Add the person to array
+            // Add the rental to array
+            
             // Close the line
             lineScanner.close();
         }

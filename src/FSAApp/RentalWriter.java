@@ -15,7 +15,7 @@ import java.util.Formatter;
  */
 public class RentalWriter {
 
-    private ArrayList<Rental> rentals;
+    //  private ArrayList<Rental> rentals;
     private static Formatter output;
 
     public RentalWriter(String fileName, ArrayList<Rental> rentals) {
@@ -30,29 +30,28 @@ public class RentalWriter {
             System.err.println("Error opening the file. Terminating.");
             System.exit(1);
         }
-        finally {
-            // to do - close file?
-        }
 
-        rentals = new ArrayList<>();
         String rentalID;
-
+        System.out.println("Writing the rentals");
         // Write people to file
         for (Rental r : rentals) {
+            System.out.println("Checking inside the for loop");
 
             if (r instanceof WholeRental) {
+                System.out.println("Writing a whole rental");
                 WholeRental wr = (WholeRental) r;
-                output.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%.2f,%s,%b,%d,%d,%b,%b", r.getRentalID(),
+                output.format("%s,%s,%s,%s,%s,%s,%.2f,%b,%s,%d,%d,%b,%b\n", r.getRentalID(),
                         r.getAddress().getStreetNumber(), r.getAddress().getStreetName(),
                         r.getAddress().getCityName(), r.getAddress().getPostCode(), r.getAddress().getState(),
-                        r.getWeeklyPrice(), r.getDescription(), r.isFurnished(), ((WholeRental) r).getNumRooms(),
+                        r.getWeeklyPrice(), r.isFurnished(), r.getDescription(), ((WholeRental) r).getNumRooms(),
                         ((WholeRental) r).getNumBathrooms(), ((WholeRental) r).isHasGarage(), ((WholeRental) r).arePetsAllowed());
 
             } else if (r instanceof RoomRental) {
-                output.format("%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%.2f,%s,%b,%b,%b", r.getRentalID(),
+                System.out.println("Writing a room rental");
+                output.format("%s,%s,%s,%s,%s,%s,%.2f,%b,%s,%b,%b\n", r.getRentalID(),
                         r.getAddress().getStreetNumber(), r.getAddress().getStreetName(),
                         r.getAddress().getCityName(), r.getAddress().getPostCode(), r.getAddress().getState(),
-                        r.getWeeklyPrice(), r.getDescription(), r.isFurnished(), ((RoomRental) r).areCouplesAllowed(), ((RoomRental) r).hasEnsuite());
+                        r.getWeeklyPrice(), r.isFurnished(), r.getDescription(), ((RoomRental) r).areCouplesAllowed(), ((RoomRental) r).hasEnsuite());
 
             }
         }

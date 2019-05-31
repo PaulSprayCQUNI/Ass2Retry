@@ -30,9 +30,12 @@ public class FSAAppFrame extends JFrame {
     private JButton editRentalBtn;      //button to create Frame to edit an entry
     private JButton displayRentalBtn;   // button to create Frame to display entries
     private JButton exitBtn;            // button to exit first Frame, close program
+    private JButton delBtn;            // button to exit first Frame, close program
     private JTextField textId;          // textField corresponding to edit button
+    private JTextField deleteId;          // textField corresponding to del button
     private JPanel pnlMainBtns;         // panel for each button
     private JPanel pnlMainEdit;
+    private JPanel pnlMainDelete;
     private JPanel pnlMainExit;
     private JPanel pnlMainDisp;
     private JPanel pnlCentre;           // panel to align button panels on
@@ -41,7 +44,7 @@ public class FSAAppFrame extends JFrame {
     values for the abstract super class Rental  */
     private ArrayList<Rental> rentals;
     private int rentalEditIndex;
-    
+
 
     /* create constructor for laying out components onto the first Frame*/
     public FSAAppFrame() {
@@ -52,8 +55,7 @@ public class FSAAppFrame extends JFrame {
         try {
             RentalReader rentalReader = new RentalReader("FSA_Availability.csv");
             rentals = rentalReader.getRentals();
- 
-                       
+
         } catch (RentalFileNotFoundException e) {
             System.out.println("No such filename exists, creating file in path." + e);
             System.exit(1);
@@ -63,6 +65,7 @@ public class FSAAppFrame extends JFrame {
         pnlMainBtns = new JPanel();
         pnlMainDisp = new JPanel();
         pnlMainEdit = new JPanel();
+        pnlMainDelete = new JPanel();
         pnlMainExit = new JPanel();
         pnlCentre = new JPanel();
         pnlCentre.setLayout(new GridLayout(3, 1));
@@ -78,9 +81,12 @@ public class FSAAppFrame extends JFrame {
         enterWholeBtn = new JButton("Whole Rental");
         enterWholeBtn.addActionListener(new EnterWholeBtnAction());
 
-        editRentalBtn = new JButton("Edit");
+        editRentalBtn = new JButton("Edit Rental of Id:");
         editRentalBtn.addActionListener(new EditBtnAction());
         textId = new JTextField("", 6);
+        delBtn = new JButton("Delete Rental of Id:");
+        delBtn.addActionListener(new DelBtnAction());
+        deleteId = new JTextField("", 6);
 
         displayRentalBtn = new JButton("Display");
         displayRentalBtn.addActionListener(new DisplayBtnAction());
@@ -95,18 +101,60 @@ public class FSAAppFrame extends JFrame {
         pnlMainDisp.add(displayRentalBtn);
         pnlMainEdit.add(editRentalBtn);
         pnlMainEdit.add(textId);
+        pnlMainDelete.add(delBtn);
+        pnlMainDelete.add(deleteId);
         pnlMainExit.add(exitBtn);
 
         /* add panels of buttons to panels for the Frame layout*/
         pnlCentre.add(pnlMainBtns);
         pnlCentre.add(pnlMainDisp);
         pnlCentre.add(pnlMainEdit);
+        pnlCentre.add(pnlMainDelete);
 
         /* add pnaels for the Frame layout to the Frame BorderLayout*/
         this.add(pnlCentre, BorderLayout.CENTER);
         this.add(pnlMainExit, BorderLayout.SOUTH);
 
     }// end of constructor for first frame // end of constructor for first frame
+
+    private class DelBtnAction implements ActionListener {
+
+        /* method for deleting a entry for an Rental Id entered into the textfield on the welcome screen, also asks
+        user if they are sure they want to delete the entry */
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            System.out.println("Start Confirmation to delete dialog");
+            int confirmed = JOptionPane.showConfirmDialog(null,
+                    "Are you sure you want Delete the entry?", "",
+                    JOptionPane.YES_NO_OPTION);
+            if (confirmed == JOptionPane.YES_OPTION) {
+                System.out.println("Start check Id is valid");
+                if (rentals.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No Rentals Entered");
+
+                } else {
+                    int i = 0;
+                    System.out.println(i);
+                    while (i < rentals.size() && !rentals.get(i).getRentalID().equals(textId.getText())) {
+                        System.out.println(i);
+                        i++;
+                    }
+                    if (i == rentals.size()) {
+                        JOptionPane.showMessageDialog(null, "No such Id exists in the list",
+                                "", JOptionPane.ERROR_MESSAGE);
+
+                    } else {
+                        System.out.println("Remove found rentals element");
+                        rentalEditIndex = i;
+                        rentals.remove(i);
+                    }
+
+                }
+//                dispose();
+                
+            }
+        } // end method
+    }   // end exit button pressed class
 
     /* adding of the classes that operate the implements ActionListener function
     in order to peform the required methods based on the button action*/
@@ -220,6 +268,7 @@ public class FSAAppFrame extends JFrame {
 
     private class EditBtnAction implements ActionListener {
 
+        @Override
         public void actionPerformed(ActionEvent event) {
             /* if else statment within this class checks if the ArrayList 
             is empty, and shows an error if it is (i.e no rentals have been 
@@ -250,6 +299,7 @@ public class FSAAppFrame extends JFrame {
 
     private class DisplayBtnAction implements ActionListener {
 
+        @Override
         public void actionPerformed(ActionEvent event) {
             /* same function as above if else, but for showing an error if there
             are no rentals to display in the Display Frame yet */
