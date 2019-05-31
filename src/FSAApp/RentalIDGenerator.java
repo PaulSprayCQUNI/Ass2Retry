@@ -1,8 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Programmer: Paul Spray S1208419
+ // File: RentalIDGenerator.java
+ // Date: May 31 2019
+ // Purpose: COIT11134 Assignment Two
+ // Task from Assignment Specifications from Phase 1(Assignment One) implemented for Assignment Two
+ 
 package FSAApp;
 
 /**
@@ -49,7 +50,10 @@ public class RentalIDGenerator {
     public static void setRentalCounter(int rentalCounter) {
         RentalIDGenerator.rentalCounter = rentalCounter;
     }
-
+/* incrementation to ensure each time getRoomRentalId() or getWholeRentalId()
+    are called from other classes, the starting value of rental counter is incremented
+    and no number is generated twich
+    */
     public static void increment() {
         rentalCounter++;
     }

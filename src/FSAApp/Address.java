@@ -4,9 +4,9 @@
 
  // Programmer: Paul Spray S1208419
  // File: Address.java
- // Date: April 26 2019
- // Purpose: COIT11134 Assignment One
- // Task 3 and 4 of Assignment Specifications
+ // Date: May 31 2019
+ // Purpose: COIT11134 Assignment Two
+ // Task 3 and 4 of Assignment Specifications from Phase 1(Assignment One)
  */
 package FSAApp;
 

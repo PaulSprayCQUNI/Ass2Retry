@@ -1,11 +1,12 @@
 /*
- * GUI code for Ass1, COIT11134
+ * GUI code for 2, COIT11134
  *  *
  // Programmer: Paul Spray S1208419
  // File: DisplayFrame.java
- // Date: April 26 2019
- // Purpose: COIT11134 Assignment One
- // Task 3 of Assignment Specifications
+ // Date: May 31 2019
+ // Purpose: COIT11134 Assignment Two
+ // Task 3 of Assignment Specifications from Phase 1(Assignment One)
+// Tasks 5 implemented for Phase 2(Assignment Two)- all rental properties display
  */
 package FSAApp;
 

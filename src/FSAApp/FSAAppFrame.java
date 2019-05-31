@@ -1,11 +1,12 @@
 /*
- * GUI code for Ass1, COIT11134
+ * GUI code for Ass2, COIT11134
  *  *
  // Programmer: Paul Spray S1208419
  // File: FSAAppFrame.java
- // Date: April 26 2019
+ // Date: May 31 2019
  // Purpose: COIT11134 Assignment One
- // Task 2 of Assignment Specifications
+ // Task 2 of Assignment Specifications for Phase 1
+// Continued requirement for Phase 2 - Tasks 1, 2 (option 2), and 3 implemented for Phase 2(Assignment Two)
  */
 package FSAApp;
 
@@ -51,10 +52,14 @@ public class FSAAppFrame extends JFrame {
 
         /* initialise the ArrayList rentals*/
         rentals = new ArrayList<Rental>();
+        /* on opening of first frame, look for the specified file in the path
+        of the program*/
 
         try {
             RentalReader rentalReader = new RentalReader("FSA_Availability.csv");
             rentals = rentalReader.getRentals();
+            /*untested catch where code should normally go to create a required
+            file if it is not found by the try     */
 
         } catch (RentalFileNotFoundException e) {
             System.out.println("No such filename exists, creating file in path." + e);
@@ -123,20 +128,20 @@ public class FSAAppFrame extends JFrame {
         user if they are sure they want to delete the entry */
         @Override
         public void actionPerformed(ActionEvent event) {
-            System.out.println("Start Confirmation to delete dialog");
+
             int confirmed = JOptionPane.showConfirmDialog(null,
                     "Are you sure you want Delete the entry?", "",
                     JOptionPane.YES_NO_OPTION);
             if (confirmed == JOptionPane.YES_OPTION) {
-                System.out.println("Start check Id is Disp");
+
                 if (rentals.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "No Rentals Entered");
 
                 } else {
                     int i = 0;
-                    System.out.println(i);
+
                     while (i < rentals.size() && !rentals.get(i).getRentalID().equals(textId.getText())) {
-                        System.out.println(i);
+
                         i++;
                     }
                     if (i == rentals.size()) {
@@ -144,14 +149,14 @@ public class FSAAppFrame extends JFrame {
                                 "", JOptionPane.ERROR_MESSAGE);
 
                     } else {
-                        System.out.println("Remove found rentals element");
+
                         rentalEditIndex = i;
                         rentals.remove(i);
                     }
 
                 }
 //                dispose();
-                
+
             }
         } // end method
     }   // end exit button pressed class
@@ -279,9 +284,9 @@ public class FSAAppFrame extends JFrame {
 
             } else {
                 int i = 0;
-                System.out.println(i);
+
                 while (i < rentals.size() && !rentals.get(i).getRentalID().equals(textId.getText())) {
-                    System.out.println(i);
+
                     i++;
                 }
                 if (i == rentals.size()) {

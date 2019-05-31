@@ -1,11 +1,11 @@
 /*
- * Child class code for Ass1, COIT11134
+ * Child class code for Ass2, COIT11134
  *  *
  // Programmer: Paul Spray S1208419
  // File: WholeRental.java
- // Date: April 26 2019
- // Purpose: COIT11134 Assignment One
- // Task 1 of Assignment Specifications
+ // Date: May 31 2019
+ // Purpose: COIT11134 Assignment Two
+ // Task 1 of Assignment Specifications for Phase 1
  */
 package FSAApp;
 

@@ -1,11 +1,12 @@
 /*
- * GUI code for Ass1, COIT11134
+ * GUI code for Ass2, COIT11134
  *  *
  // Programmer: Paul Spray S1208419
  // File: FSAApp.java
- // Date: April 26 2019
- // Purpose: COIT11134 Assignment One
- // Task 2 of Assignment Specifications
+ // Date: May 31 2019
+ // Purpose: COIT11134 Assignment Two
+ // Task 2 of Assignment Specifications for Phase 1
+//// Continued requirment for for Phase 2(Assignment Two)
  */
 package FSAApp;
 
@@ -38,6 +39,8 @@ public class FSAApp {
             frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             frame.addWindowListener(new WindowAdapter() {
                 @Override
+                
+                // added missing method from last assignment to query user if close button on Window is pushed
                 public void windowClosing(WindowEvent we) {
                     String ObjButtons[] = {"Yes", "No"};
                     int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure you want to exit?", "Friendly Student Accommodation App", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);

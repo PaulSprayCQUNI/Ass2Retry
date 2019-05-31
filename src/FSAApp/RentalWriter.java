@@ -1,7 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * GUI code for Ass2, COIT11134
+ *  *
+ // Programmer: Paul Spray S1208419
+ // File: RentalWriter.java
+ // Date: May 31 2019
+ // Purpose: COIT11134 Assignment Two
+ // Task 6 of Assignment Specifications for Phase 2
+// reference - code derived from FileOps2 package shown in class by S.Gordon
+
  */
 package FSAApp;
 
@@ -15,7 +21,6 @@ import java.util.Formatter;
  */
 public class RentalWriter {
 
-    //  private ArrayList<Rental> rentals;
     private static Formatter output;
 
     public RentalWriter(String fileName, ArrayList<Rental> rentals) {
@@ -23,6 +28,10 @@ public class RentalWriter {
         // Open the output file
         try {
             output = new Formatter(fileName);
+
+            /* catches if the source file has been set to read only or if    
+            the file has been erroneously named or is one the program should
+            not access    */
         } catch (SecurityException securityException) {
             System.err.println("Write permission denied. Terminating.");
             System.exit(1);
@@ -32,13 +41,12 @@ public class RentalWriter {
         }
 
         String rentalID;
-        System.out.println("Writing the rentals");
-        // Write people to file
+
+        // Write rentals to file
         for (Rental r : rentals) {
-            System.out.println("Checking inside the for loop");
 
             if (r instanceof WholeRental) {
-                System.out.println("Writing a whole rental");
+
                 WholeRental wr = (WholeRental) r;
                 output.format("%s,%s,%s,%s,%s,%s,%.2f,%b,%s,%d,%d,%b,%b\n", r.getRentalID(),
                         r.getAddress().getStreetNumber(), r.getAddress().getStreetName(),
@@ -47,7 +55,7 @@ public class RentalWriter {
                         ((WholeRental) r).getNumBathrooms(), ((WholeRental) r).isHasGarage(), ((WholeRental) r).arePetsAllowed());
 
             } else if (r instanceof RoomRental) {
-                System.out.println("Writing a room rental");
+
                 output.format("%s,%s,%s,%s,%s,%s,%.2f,%b,%s,%b,%b\n", r.getRentalID(),
                         r.getAddress().getStreetNumber(), r.getAddress().getStreetName(),
                         r.getAddress().getCityName(), r.getAddress().getPostCode(), r.getAddress().getState(),

@@ -1,0 +1,71 @@
+  /* commented out values checking for fields of attributes 
+            that are radiobuttons for booleans from child class RoomRental
+
+            if (!cplsAllwdRadBtn.isSelected() && (!nocplsAllwdRadBtn.isSelected())) {
+                JOptionPane.showMessageDialog(null, "Please select option to"
+                        + " show if Couples are Allowed",
+                        "", JOptionPane.ERROR_MESSAGE);
+                cplsAllwdRadBtn.requestFocus();
+            }
+            if (!hasEnsuiteRadBtn.isSelected() && (!noEnsuiteRadBtn.isSelected())) {
+                JOptionPane.showMessageDialog(null, "Please select option to"
+                        + " show if Room has an Ensuite",
+                        "", JOptionPane.ERROR_MESSAGE);
+                hasEnsuiteRadBtn.requestFocus();
+            } // end values checking for RoomRental entry
+            
+            */
+
+			
+	/* variable for following if else statment and try catch to check 
+        if numRooms field contains an entry and that it is of type integer
+            int numRoomsVal;
+            if (numRmsTxtFld.getText().compareTo("") == 0) {
+                JOptionPane.showMessageDialog(null, "Please enter number of "
+                        + "Rooms in House",
+                        "", JOptionPane.ERROR_MESSAGE);
+                numRmsTxtFld.requestFocus();
+            } else {
+                try {
+                    numRoomsVal = Integer.parseInt(numRmsTxtFld.getText());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Please enter number of "
+                            + "Rooms as Whole Number",
+                            "", JOptionPane.ERROR_MESSAGE);
+                    numRmsTxtFld.requestFocus();
+                }
+
+            }
+            /* COMMENTED out following if else statment and try catch to check 
+        if numBathRooms field contains an entry and that it is of type integer
+            int numBathsVal;
+            if (numBathRmsTxtFld.getText().compareTo("") == 0) {
+                JOptionPane.showMessageDialog(null, "Please enter number of "
+                        + "Bathrooms in House",
+                        "", JOptionPane.ERROR_MESSAGE);
+                numBathRmsTxtFld.requestFocus();
+            } else {
+                try {
+                    numBathsVal = Integer.parseInt(numBathRmsTxtFld.getText());
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, "Please enter number of "
+                            + "Bathrooms in House",
+                            "", JOptionPane.ERROR_MESSAGE);
+                    numBathRmsTxtFld.requestFocus();
+                }
+
+            }
+
+            if (!hasGarageRadBtn.isSelected() && (!noGarageRadBtn.isSelected())) {
+                JOptionPane.showMessageDialog(null, "Please select option for Garage",
+                        "", JOptionPane.ERROR_MESSAGE);
+                hasGarageRadBtn.requestFocus();
+            }
+
+            if (!petsAllwdRadBtn.isSelected() && (!nopetsAllwdRadBtn.isSelected())) {
+                JOptionPane.showMessageDialog(null, "Please select option "
+                        + " to show if Pets are Allowed",
+                        "", JOptionPane.ERROR_MESSAGE);
+                petsAllwdRadBtn.requestFocus();
+            }// end of checking values for Whole Rental
+            */  

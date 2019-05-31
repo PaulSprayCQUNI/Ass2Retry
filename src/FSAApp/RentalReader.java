@@ -1,7 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Prorerties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * GUI code for Ass2, COIT11134
+ *  *
+ // Programmer: Paul Spray S1208419
+ // File: RentalReader.java
+ // Date: May 31 2019
+ // Purpose: COIT11134 Assignment Two
+ // Task 6 of Assignment Specifications for Phase 2
+// reference - code derived from FileOps2 package shown in class by S.Gordon
+
  */
 package FSAApp;
 
@@ -44,7 +50,7 @@ public class RentalReader {
             // Set separator to comma
             lineScanner.useDelimiter(",");
 
-            // Read the fields from line into person
+            // Read the fields from line into rentals
             try {
                 rentalID = lineScanner.next();
 // rentalID,streetNumber,streetName,cityName,postCode,state,weeklyPrice,furnished,description,couplesAllowed,hasEnsuite,numRooms,numBathrooms,hasGarage,petsAllowed
@@ -58,6 +64,7 @@ public class RentalReader {
                     rr.setDescription(lineScanner.next());
                     rr.setCouplesAllowed(Boolean.parseBoolean(lineScanner.next()));
                     rr.setHasEnsuite(Boolean.parseBoolean(lineScanner.next()));
+                    // Add the rental to array
                     rentals.add(rr);
                 } else {
                     WholeRental wr = new WholeRental();
@@ -71,10 +78,14 @@ public class RentalReader {
                     wr.setNumBathrooms(Integer.parseInt(lineScanner.next()));
                     wr.setHasGarage(Boolean.parseBoolean(lineScanner.next()));
                     wr.setPetsAllowed(Boolean.parseBoolean(lineScanner.next()));
+                    // Add the rental to array
                     rentals.add(wr);
                 }
 
-            } // Wrong format of fields
+            } /* Wrong format of fields - catches if the source file for the 
+            output list in Task 6 has been altered outside of the program and has errors or
+            missing information
+            */
             catch (IllegalArgumentException e) {
                 System.err.println("Error reading file due to illegal argument. Terminating.");
                 System.exit(1);
@@ -82,10 +93,8 @@ public class RentalReader {
             catch (NoSuchElementException e) {
                 System.err.println("Error reading file due to no such element. Terminating.");
                 System.exit(1);
-            } // If you remove the following catch, then this error will be caught in the main
+            }
 
-            // Add the rental to array
-            
             // Close the line
             lineScanner.close();
         }

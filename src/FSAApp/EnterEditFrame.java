@@ -1,11 +1,12 @@
 /*
- * GUI code for Ass1, COIT11134
+ * GUI code for Ass2, COIT11134
  *  *
  // Programmer: Paul Spray S1208419
  // File: EnterEditFrame.java
- // Date: April 26 2019
+ // Date: May 31 2019
  // Purpose: COIT11134 Assignment One
- // Task 3 of Assignment Specifications
+ // Task 3 of Assignment Specifications from Phase 1(Assignment One)
+// Tasks 1, 2 (option 2), and 3 implemented for Phase 2(Assignment Two) 
  */
 package FSAApp;
 
@@ -609,4 +610,4 @@ public class EnterEditFrame extends JFrame {
 
         }
     }   // end of private classes of this frame
-}   // end of class EnterEditFrame
+} // end of class EnterEditFrame

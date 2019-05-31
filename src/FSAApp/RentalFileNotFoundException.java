@@ -1,7 +1,12 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * GUI code for Ass2, COIT11134
+ *  *
+ // Programmer: Paul Spray S1208419
+ // File: RentalFileNotFoundException.java
+ // Date: May 31 2019
+ // Purpose: COIT11134 Assignment Two
+ // Task 6 of Assignment Specifications for Phase 2
+// Exception handler related to RentalReader and RentalWriter
  */
 package FSAApp;
 
