@@ -50,6 +50,7 @@ public class RentalReader {
 // rentalID,streetNumber,streetName,cityName,postCode,state,weeklyPrice,furnished,description,couplesAllowed,hasEnsuite,numRooms,numBathrooms,hasGarage,petsAllowed
                 if (rentalID.startsWith("R")) {
                     RoomRental rr = new RoomRental();
+                    RentalIDGenerator.increment();
                     rr.setRentalID(rentalID);
                     rr.setAddress(new Address(lineScanner.next(), lineScanner.next(), lineScanner.next(), lineScanner.next(), lineScanner.next()));
                     rr.setWeeklyPrice(Double.parseDouble(lineScanner.next()));
@@ -60,6 +61,7 @@ public class RentalReader {
                     rentals.add(rr);
                 } else {
                     WholeRental wr = new WholeRental();
+                    RentalIDGenerator.increment();
                     wr.setRentalID(rentalID);
                     wr.setAddress(new Address(lineScanner.next(), lineScanner.next(), lineScanner.next(), lineScanner.next(), lineScanner.next()));
                     wr.setWeeklyPrice(Double.parseDouble(lineScanner.next()));

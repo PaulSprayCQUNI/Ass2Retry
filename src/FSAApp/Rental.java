@@ -152,10 +152,17 @@ public abstract class Rental {          // beginning of class Rental
 
     @Override
     public String toString() {
-      return String.format("\n" + "RentalID:" + rentalID + "\n" 
+      return "\n" + "RentalID:" + rentalID + "\n" 
+                + address + "\n" + "Weekly Price: $"+ String.format("%.2f",weeklyPrice) +
+                 " \nFurnished: " + furnished + " \nDescription: "
+                + description + "\n";
+        
+        
+        /*
+        ("\n" + "RentalID:" + rentalID + "\n" 
                 + address + "\n" + "Weekly Price: $"+ weeklyPrice +
                  " \nFurnished: " + furnished + " \nDescription: "
-                + description + "\n");
+                + description + "\n");*/
     }
 
 } // end of abstract super class Rental

@@ -88,7 +88,7 @@ public class FSAAppFrame extends JFrame {
         delBtn.addActionListener(new DelBtnAction());
         deleteId = new JTextField("", 6);
 
-        displayRentalBtn = new JButton("Display");
+        displayRentalBtn = new JButton("Display all Rentals");
         displayRentalBtn.addActionListener(new DisplayBtnAction());
 
         exitBtn = new JButton("Exit");
@@ -128,7 +128,7 @@ public class FSAAppFrame extends JFrame {
                     "Are you sure you want Delete the entry?", "",
                     JOptionPane.YES_NO_OPTION);
             if (confirmed == JOptionPane.YES_OPTION) {
-                System.out.println("Start check Id is valid");
+                System.out.println("Start check Id is Disp");
                 if (rentals.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "No Rentals Entered");
 

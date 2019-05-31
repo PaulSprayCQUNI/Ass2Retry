@@ -1,4 +1,2 @@
-R0000ExamplePropertyDoNotDelete,123,One Street,Cairns,4870,QLD,100.00,true,a room in a house,true,true
-R1001,20,Cairns Street,Cairns,4870,QLD,150.00,true,a room in Cairns Street,true,false
-W1002,56,Bunda St,Cairns,4870,QLD,400.00,true,a house in Bunda Street,3,2,false,true
-R1003,55,Draper Street,Cairns,4870,QLD,200.00,true,a room in a house in Draper St,true,true
+R1000,123,One Street,Cairns,4870,QLD,100.00,true,a room in a house,true,true
+W1000,321,Three Street,Cairns,4870,QLD,400.00,true,a house in Three Street,2,2,true,true

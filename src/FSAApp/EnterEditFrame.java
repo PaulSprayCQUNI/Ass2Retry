@@ -351,52 +351,49 @@ public class EnterEditFrame extends JFrame {
 
     }
 
-    /* method saveFormDetails() called by action of button to Submit being
-    pressed in the frame EnterEditFrame    */
-    private void saveFormDetails() {
-        /* construct new empty Rental r, Whole wr or Room Rental rr to be stored to 
-        ArrayList rentals of type Rental */
-        Rental r;
-        RoomRental rr;
-        WholeRental wr;
-
+    private boolean validateEntries() {
         /* read values from form - first code is to check all fields for 
-        attributes of classes Rental and Address or a radiobutton option is 
-        selected - prompts specific errors if there is no entry or selection,
-        or value is of wrong type*/
+        attributes of classes Rental and validate entries, return false
+        for any fields not containing an appropriate entry*/
         if (stNumTxtFld.getText().compareTo("") == 0) {
             JOptionPane.showMessageDialog(null, "Please enter a street Number",
                     "", JOptionPane.ERROR_MESSAGE);
             stNumTxtFld.requestFocus();
+            return false;
         }
         if (stNameTxtFld.getText().compareTo("") == 0) {
             JOptionPane.showMessageDialog(null, "Please enter a street Name",
                     "", JOptionPane.ERROR_MESSAGE);
             stNameTxtFld.requestFocus();
+            return false;
         }
 
         if (cityTxtFld.getText().compareTo("") == 0) {
             JOptionPane.showMessageDialog(null, "Please enter a city/town Name",
                     "", JOptionPane.ERROR_MESSAGE);
             cityTxtFld.requestFocus();
+            return false;
         }
 
         if (pstCodeTxtFld.getText().compareTo("") == 0) {
             JOptionPane.showMessageDialog(null, "Please enter a Post Code",
                     "", JOptionPane.ERROR_MESSAGE);
             pstCodeTxtFld.requestFocus();
+            return false;
         }
 
         if (stateNameTxtFld.getText().compareTo("") == 0) {
             JOptionPane.showMessageDialog(null, "Please enter a State",
                     "", JOptionPane.ERROR_MESSAGE);
             stateNameTxtFld.requestFocus();
+            return false;
         }
 
         if (descriptionTxtFld.getText().compareTo("") == 0) {
             JOptionPane.showMessageDialog(null, "Please descripe the Rental",
                     "", JOptionPane.ERROR_MESSAGE);
             descriptionTxtFld.requestFocus();
+            return false;
         }
 
         /* variable for following if else statment and try catch to check 
@@ -407,14 +404,16 @@ public class EnterEditFrame extends JFrame {
                     + " 100.00",
                     "", JOptionPane.ERROR_MESSAGE);
             weeklyPriceTxtFld.requestFocus();
+            return false;
         } else {
             try {
                 weeklyPriceVal = Double.parseDouble(weeklyPriceTxtFld.getText());
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(null, "Please enter a price in"
                         + " format 100.00",
                         "", JOptionPane.ERROR_MESSAGE);
                 weeklyPriceTxtFld.requestFocus();
+                return false;
             }
 
         }
@@ -424,86 +423,53 @@ public class EnterEditFrame extends JFrame {
                     + " show if Furnished",
                     "", JOptionPane.ERROR_MESSAGE);
             furnRadBtn.requestFocus();
+            return false;
         }
-        /* end values checking for fields of attributes from super class
-         Rental and Address class */
+        /* Removed values checking for fields of attributes 
+            that are radiobuttons for booleans from child classes RoomRental 
+        and WholeRental that were  in previous code*/
+
+        // end of validation checks to return error messages
+        return true;        // return true if all above tests validate
+    }
+
+
+    /* method saveFormDetails() called by action of button to Submit being
+    pressed in the frame EnterEditFrame    */
+    private void saveFormDetails() {
+        /* construct new empty Rental r, Whole wr or Room Rental rr to be stored to 
+        ArrayList rentals of type Rental */
+        Rental r;
+        RoomRental rr;
+        WholeRental wr;
+        // if statment to stop SaveFormDetails and call to validateEntries() for error message/s
+        /*  if (validateEntries()== false) {
+            return;
+        }*/
 
         if (userAction.equals("newRoom")) {
-            /* values checking for fields of attributes from child class RoomRental*/
 
-            if (!cplsAllwdRadBtn.isSelected() && (!nocplsAllwdRadBtn.isSelected())) {
-                JOptionPane.showMessageDialog(null, "Please select option to"
-                        + " show if Couples are Allowed",
-                        "", JOptionPane.ERROR_MESSAGE);
-                cplsAllwdRadBtn.requestFocus();
-            }
-            if (!hasEnsuiteRadBtn.isSelected() && (!noEnsuiteRadBtn.isSelected())) {
-                JOptionPane.showMessageDialog(null, "Please select option to"
-                        + " show if Room has an Ensuite",
-                        "", JOptionPane.ERROR_MESSAGE);
-                hasEnsuiteRadBtn.requestFocus();
-            } // end values checking for RoomRental entry
             // objects for setting of RoomRental values to object of Rentals r
             rr = new RoomRental();
             r = rr;
             rr.setRentalID(RentalIDGenerator.getRoomRentalId());
             rr.setCouplesAllowed(cplsAllwdRadBtn.isSelected());
             rr.setHasEnsuite(hasEnsuiteRadBtn.isSelected());
+            Address a = new Address();
+            a.setStreetNumber(stNumTxtFld.getText());
+            a.setStreetName(stNameTxtFld.getText());
+            a.setCityName(cityTxtFld.getText());
+            a.setPostCode(pstCodeTxtFld.getText());
+            a.setState(stateNameTxtFld.getText());
+            // attributes of Address return to setAddress() of object of Rental r
+            r.setAddress(a);
+            r.setWeeklyPrice(Double.parseDouble(weeklyPriceTxtFld.getText()));
+            r.setFurnished(furnRadBtn.isSelected());
+            r.setDescription(descriptionTxtFld.getText());
+            rentals.add(r);
 
             // else statement continues above checking of entries for Whole Rental
-        } else {
-
-            /* variable for following if else statment and try catch to check 
-        if numRooms field contains an entry and that it is of type integer*/
-            int numRoomsVal;
-            if (numRmsTxtFld.getText().compareTo("") == 0) {
-                JOptionPane.showMessageDialog(null, "Please enter number of "
-                        + "Rooms in House",
-                        "", JOptionPane.ERROR_MESSAGE);
-                numRmsTxtFld.requestFocus();
-            } else {
-                try {
-                    numRoomsVal = Integer.parseInt(numRmsTxtFld.getText());
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Please enter number of "
-                            + "Rooms as Whole Number",
-                            "", JOptionPane.ERROR_MESSAGE);
-                    numRmsTxtFld.requestFocus();
-                }
-
-            }
-            /* variable for following if else statment and try catch to check 
-        if numBathRooms field contains an entry and that it is of type integer*/
-            int numBathsVal;
-            if (numBathRmsTxtFld.getText().compareTo("") == 0) {
-                JOptionPane.showMessageDialog(null, "Please enter number of "
-                        + "Bathrooms in House",
-                        "", JOptionPane.ERROR_MESSAGE);
-                numBathRmsTxtFld.requestFocus();
-            } else {
-                try {
-                    numBathsVal = Integer.parseInt(numBathRmsTxtFld.getText());
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Please enter number of "
-                            + "Bathrooms in House",
-                            "", JOptionPane.ERROR_MESSAGE);
-                    numBathRmsTxtFld.requestFocus();
-                }
-
-            }
-
-            if (!hasGarageRadBtn.isSelected() && (!noGarageRadBtn.isSelected())) {
-                JOptionPane.showMessageDialog(null, "Please select option for Garage",
-                        "", JOptionPane.ERROR_MESSAGE);
-                hasGarageRadBtn.requestFocus();
-            }
-
-            if (!petsAllwdRadBtn.isSelected() && (!nopetsAllwdRadBtn.isSelected())) {
-                JOptionPane.showMessageDialog(null, "Please select option "
-                        + " to show if Pets are Allowed",
-                        "", JOptionPane.ERROR_MESSAGE);
-                petsAllwdRadBtn.requestFocus();
-            }// end of checking values for Whole Rental
+        } else if (userAction.equals("wholeRoom")) {
 
             // objects for setting of WholeRental values to object of Rentals r
             wr = new WholeRental();
@@ -513,23 +479,57 @@ public class EnterEditFrame extends JFrame {
             wr.setNumBathrooms(Integer.parseInt(numBathRmsTxtFld.getText()));
             wr.setHasGarage(hasGarageRadBtn.isSelected());
             wr.setPetsAllowed(petsAllwdRadBtn.isSelected());
+            Address a = new Address();
+            a.setStreetNumber(stNumTxtFld.getText());
+            a.setStreetName(stNameTxtFld.getText());
+            a.setCityName(cityTxtFld.getText());
+            a.setPostCode(pstCodeTxtFld.getText());
+            a.setState(stateNameTxtFld.getText());
+            // attributes of Address return to setAddress() of object of Rental r
+            r.setAddress(a);
+            r.setWeeklyPrice(Double.parseDouble(weeklyPriceTxtFld.getText()));
+            r.setFurnished(furnRadBtn.isSelected());
+            r.setDescription(descriptionTxtFld.getText());
+            rentals.add(r);
+        } else {
+            r = rentals.get(rentalEditIndex);
+
+            if (r instanceof RoomRental) {
+
+                ((RoomRental) r).setCouplesAllowed(cplsAllwdRadBtn.isSelected());
+                ((RoomRental) r).setHasEnsuite(hasEnsuiteRadBtn.isSelected());
+                Address a = new Address();
+                a.setStreetNumber(stNumTxtFld.getText());
+                a.setStreetName(stNameTxtFld.getText());
+                a.setCityName(cityTxtFld.getText());
+                a.setPostCode(pstCodeTxtFld.getText());
+                a.setState(stateNameTxtFld.getText());
+                // attributes of Address return to setAddress() of object of Rental r
+                r.setAddress(a);
+                r.setWeeklyPrice(Double.parseDouble(weeklyPriceTxtFld.getText()));
+                r.setFurnished(furnRadBtn.isSelected());
+                r.setDescription(descriptionTxtFld.getText());
+            } else {
+
+                ((WholeRental) r).setNumRooms(Integer.parseInt(numRmsTxtFld.getText()));
+                ((WholeRental) r).setNumBathrooms(Integer.parseInt(numBathRmsTxtFld.getText()));
+                ((WholeRental) r).setHasGarage(hasGarageRadBtn.isSelected());
+                ((WholeRental) r).setPetsAllowed(petsAllwdRadBtn.isSelected());
+                Address a = new Address();
+                a.setStreetNumber(stNumTxtFld.getText());
+                a.setStreetName(stNameTxtFld.getText());
+                a.setCityName(cityTxtFld.getText());
+                a.setPostCode(pstCodeTxtFld.getText());
+                a.setState(stateNameTxtFld.getText());
+                // attributes of Address return to setAddress() of object of Rental r
+                r.setAddress(a);
+                r.setWeeklyPrice(Double.parseDouble(weeklyPriceTxtFld.getText()));
+                r.setFurnished(furnRadBtn.isSelected());
+                r.setDescription(descriptionTxtFld.getText());
+
+            }
 
         }
-        // object of Address class required to use get methods of that class
-        Address a = new Address();
-        a.setStreetNumber(stNumTxtFld.getText());
-        a.setStreetName(stNameTxtFld.getText());
-        a.setCityName(cityTxtFld.getText());
-        a.setPostCode(pstCodeTxtFld.getText());
-        a.setState(stateNameTxtFld.getText());
-        // attributes of Address return to setAddress() of object of Rental r
-        r.setAddress(a);
-        r.setWeeklyPrice(Double.parseDouble(weeklyPriceTxtFld.getText()));
-        r.setFurnished(furnRadBtn.isSelected());
-        r.setDescription(descriptionTxtFld.getText());
-
-        /* return r as the Rental object to ArrayList rentals*/
-        rentals.add(r);
 
     }
 
@@ -540,6 +540,12 @@ public class EnterEditFrame extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent event) {
+
+            if (validateEntries() == false) // if any test fails
+            {
+                return; // stop execution of this method
+            }
+
             saveFormDetails();          // call to saveFormDetails when Submit button pressed
             /* all actions in this frame return to first frame of program after
             executing the required code */

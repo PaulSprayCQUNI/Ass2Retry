@@ -32,7 +32,7 @@ public class FSAApp {
         EventQueue.invokeLater(() -> {                  // defers the running of the main method code until all pending events are processed
             FSAAppFrame frame = new FSAAppFrame();
             frame.setTitle("FSA Rental Program - Welcome");
-            frame.setSize(300, 200);
+            frame.setSize(600, 400);
             frame.setVisible(true);
             frame.setResizable(true);
             frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
